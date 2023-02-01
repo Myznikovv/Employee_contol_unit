@@ -45,7 +45,9 @@ class AppAddEmployee extends Component{
                         className="btn btn-outline-light"
                         onClick={(e)=>{
                             e.preventDefault();
-                            createItem(name, salary);
+                            if(!name || !salary){
+                                alert("Enter employee name and salary")
+                            }else{createItem(name, salary);}
                         }}
                     >
                         Добавить

@@ -1,32 +1,25 @@
 import './employee-card.css';
-import {Component} from "react";
 
-class EmployeeCard extends Component{
 
-    constructor(props) {
-        super(props);
-        this.state ={
-            increase: this.props.increase,
-            like: false
-        }
-    }
+const  EmployeeCard =(props)=>{
 
-    onIncrease = ()=>{
-        this.setState(({increase})=>({
-            increase: !increase
-        }));
-    }
 
-    setLike=()=>{
-        this.setState(({like})=>({
-            like:!like
-        }))
-    }
+    //
+    // onIncrease = ()=>{
+    //     this.setState(({increase})=>({
+    //         increase: !increase
+    //     }));
+    // }
+    //
+    // setLike=()=>{
+    //     this.setState(({like})=>({
+    //         like:!like
+    //     }))
+    // }
 
-    render() {
 
-        const {name, salary, deleteItem} = this.props;
-        const {increase,like} = this.state;
+
+        const {name, salary, deleteItem, like, increase, onIncrease, onLike} = props;
 
         let classNames = "list-group-item d-flex justify-content-between";
         if (increase) {
@@ -38,10 +31,10 @@ class EmployeeCard extends Component{
         }
         return (
             <li className={classNames}>
-                <span onClick={this.setLike} className="list-group-item-label">{name}</span>
+                <span onClick={onLike} className="list-group-item-label">{name}</span>
                 <input type="text" className="list-group-item-input" defaultValue={`${salary} $`}/>
                 <div className='d-flex justify-content-center align-items-center'>
-                    <button onClick={this.onIncrease} type="button"
+                    <button onClick={onIncrease} type="button"
                             className="btn-cookie btn-sm ">
                         <i className="fas fa-cookie"></i>
                     </button>
@@ -54,7 +47,6 @@ class EmployeeCard extends Component{
                 </div>
             </li>
         )
-    }
 }
 
 export default EmployeeCard;

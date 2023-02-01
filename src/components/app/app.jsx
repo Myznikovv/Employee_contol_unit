@@ -14,12 +14,13 @@ class App extends Component{
         super(props);
         this.state = {
             data : [
-                {name: "John", salary: 1000, increase:true, id:1},
-                {name: "Ivan", salary: 2000, increase:false, id:2},
-                {name: "Vitaly", salary: 5000, increase:true, id:3},
-                {name: "Artem", salary: 3000, increase:false, id:4}
+                {name: "John", salary: 1000, increase:true, like:true ,id:1},
+                {name: "Ivan", salary: 2000, increase:false, like:false, id:2},
+                {name: "Vitaly", salary: 5000, increase:true, like:false, id:3},
+                {name: "Artem", salary: 3000, increase:false, like:false, id:4}
             ],
-            currId:5
+            currId:5,
+
         }
     }
 
@@ -48,11 +49,42 @@ class App extends Component{
 
     }
 
+
+    onLike= (id)=>{
+        this.setState(({data})=>({
+            data: data.map(item=>{
+                if (item.id === id){
+                    return{ ...item, like: !item.like}
+                }
+                return item;
+            })
+        }))
+    }
+
+    onIncrease= (id)=>{
+
+        this.setState(({data})=>({
+            data: data.map(item=>{
+                if (item.id === id){
+                    return{ ...item, increase: !item.increase}
+                }
+                return item;
+            })
+        }))
+    }
+
+    getTotal
    render() {
        const {data} = this.state;
+        const total = data.length;
+        const total_increase = data.filter(item =>item.increase).length;
+
        return (
            <div className="app">
-               <AppInfo/>
+               <AppInfo
+                   total={ total}
+                   total_increase={total_increase}
+               />
                <div className="search-panel">
                    <AppSearch/>
                    <AppPanel/>
@@ -60,6 +92,8 @@ class App extends Component{
                <EmployeeList
                    data={data}
                    deleteItem={this.deleteItem}
+                   onIncrease={this.onIncrease}
+                   onLike = {this.onLike}
                />
                <AppAddEmployee
                     createItem={this.createEmployee}
