@@ -6,7 +6,7 @@ class AppAddEmployee extends Component{
     constructor(props) {
         super(props);
         this.state={
-            Name:'',
+            name:'',
             salary: ''
         }
     }
@@ -17,8 +17,8 @@ class AppAddEmployee extends Component{
         })
     }
 
-
     render(){
+        const {createItem} = this.props;
         const {name, salary} = this.state;
         return (
             <div className="app-add-form">
@@ -40,8 +40,15 @@ class AppAddEmployee extends Component{
                            onChange={this.onValueChange}
                     />
 
-                    <button type="submit"
-                            className="btn btn-outline-light">Добавить
+                    <button
+                        type="submit"
+                        className="btn btn-outline-light"
+                        onClick={(e)=>{
+                            e.preventDefault();
+                            createItem(name, salary);
+                        }}
+                    >
+                        Добавить
                     </button>
                 </form>
             </div>

@@ -18,7 +18,8 @@ class App extends Component{
                 {name: "Ivan", salary: 2000, increase:false, id:2},
                 {name: "Vitaly", salary: 5000, increase:true, id:3},
                 {name: "Artem", salary: 3000, increase:false, id:4}
-            ]
+            ],
+            currId:5
         }
     }
 
@@ -30,6 +31,23 @@ class App extends Component{
             }
         })
     }
+
+    createEmployee= (name, salary)=>{
+        this.setState(({data, currId})=>{
+            const newEmployee = {
+                name: name ,
+                salary:salary,
+                increase: false,
+                id:currId
+            }
+            return{
+                currId: currId + 1,
+                data: data.concat([newEmployee])
+            }
+        })
+
+    }
+
    render() {
        const {data} = this.state;
        return (
@@ -43,7 +61,9 @@ class App extends Component{
                    data={data}
                    deleteItem={this.deleteItem}
                />
-               <AppAddEmployee/>
+               <AppAddEmployee
+                    createItem={this.createEmployee}
+               />
            </div>
        );
    }
