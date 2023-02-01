@@ -1,12 +1,16 @@
 import "./employee_list.css"
 import EmployeeCard from "../employee-card/employee-card";
 
-const EmployeeList = ({data})=>{
+const EmployeeList = ({data, deleteItem})=>{
 
     let elements = data.map((item)=>{
     const {id, ...itemValues}  = item;
         return(
-            <EmployeeCard key={id} {...itemValues}/>
+            <EmployeeCard
+                key={id}
+                {...itemValues}
+                deleteItem={()=>{deleteItem(id)}}
+            />
         )
     })
     return(
