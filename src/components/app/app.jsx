@@ -74,7 +74,7 @@ class App extends Component{
     }
 
     searchEmp = (term, items)=>{
-        if (term.length == 0){
+        if (term.length === 0){
             return items
         }
         return items.filter(item=>{
@@ -98,6 +98,7 @@ class App extends Component{
                 return items.filter(item=>{
                     return item.salary>1000;
                 })
+            default:return items;
         }
 
     }
