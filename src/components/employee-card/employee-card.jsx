@@ -3,22 +3,6 @@ import './employee-card.css';
 
 const  EmployeeCard =(props)=>{
 
-
-    //
-    // onIncrease = ()=>{
-    //     this.setState(({increase})=>({
-    //         increase: !increase
-    //     }));
-    // }
-    //
-    // setLike=()=>{
-    //     this.setState(({like})=>({
-    //         like:!like
-    //     }))
-    // }
-
-
-
         const {name, salary, deleteItem, like, increase, onIncrease, onLike} = props;
 
         let classNames = "list-group-item d-flex justify-content-between";

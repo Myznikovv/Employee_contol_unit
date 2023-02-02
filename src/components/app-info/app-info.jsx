@@ -6,8 +6,8 @@ function AppInfo(props){
     return(
         <div className="app-info">
             <h1>Учет сотрудников в компании N </h1>
-            <p>Общее число сотрудников:{total}</p>
-            <p>Премию получат:{total_increase}</p>
+            <h2>Общее число сотрудников:{total}</h2>
+            <h3>Премию получат:{total_increase}</h3>
         </div>
     )
 }

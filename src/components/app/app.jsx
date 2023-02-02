@@ -19,8 +19,9 @@ class App extends Component{
                 {name: "Vitaly", salary: 5000, increase:true, like:false, id:3},
                 {name: "Artem", salary: 3000, increase:false, like:false, id:4}
             ],
+            term:'',
+            filter:'all',
             currId:5,
-
         }
     }
 
@@ -62,7 +63,6 @@ class App extends Component{
     }
 
     onIncrease= (id)=>{
-
         this.setState(({data})=>({
             data: data.map(item=>{
                 if (item.id === id){
@@ -73,11 +73,30 @@ class App extends Component{
         }))
     }
 
-    getTotal
+    searchEmp = (term, items)=>{
+        if (term.length == 0){
+            return items
+        }
+        return items.filter(item=>{
+            return item.name.indexOf(term) > -1
+        })
+    }
+
+    onUpdateSearch= (term)=>{
+        this.setState({term} );
+    }
+
+    filterEmployees = (items, filter)=>{
+
+
+    }
+
+
    render() {
-       const {data} = this.state;
+        const {data, term} = this.state;
         const total = data.length;
         const total_increase = data.filter(item =>item.increase).length;
+        const visibleData = this.searchEmp(term, data);
 
        return (
            <div className="app">
@@ -86,11 +105,14 @@ class App extends Component{
                    total_increase={total_increase}
                />
                <div className="search-panel">
-                   <AppSearch/>
+                   <AppSearch
+                       onUpdateSearch={this.onUpdateSearch}
+                       value={term}
+                   />
                    <AppPanel/>
                </div>
                <EmployeeList
-                   data={data}
+                   data={visibleData}
                    deleteItem={this.deleteItem}
                    onIncrease={this.onIncrease}
                    onLike = {this.onLike}
